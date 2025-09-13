@@ -7,6 +7,7 @@ internal class Enumerations
         Create,
         Modify,
         Delete,
+        Timer,
         Exit
     }
 }

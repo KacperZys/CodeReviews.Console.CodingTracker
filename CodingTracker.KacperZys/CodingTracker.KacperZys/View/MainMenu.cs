@@ -32,6 +32,9 @@ internal static class MainMenu
                 case MenuOptions.Delete:
                     mainMenuController.Delete();
                     break;
+                case MenuOptions.Timer:
+                    mainMenuController.Timer();
+                    break;
                 case MenuOptions.Exit:
                     return;
                 default:

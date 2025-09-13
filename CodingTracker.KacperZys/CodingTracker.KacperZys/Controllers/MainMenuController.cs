@@ -1,6 +1,7 @@
 ﻿using CodingTracker.KacperZys.Exceptions;
 using CodingTracker.KacperZys.Model;
 using Spectre.Console;
+using System.Diagnostics;
 
 namespace CodingTracker.KacperZys.Controllers;
 internal class MainMenuController
@@ -92,5 +93,35 @@ internal class MainMenuController
         {
             AnsiConsole.MarkupLine("[red]Something went wrong. Please try again.[/]");
         }
+    }
+
+    internal void Timer()
+    {
+        Console.Clear();
+        Stopwatch stopwatch = new Stopwatch();
+        AnsiConsole.MarkupLine("[green]Press any key to start the timer.[/]");
+        AnsiConsole.Markup("...");
+        Console.ReadKey(true);
+        DateTime startTime = DateTime.Now;
+        stopwatch.Start();
+        AnsiConsole.MarkupLine("\n[green]Press any key to stop the timer.[/]");
+        AnsiConsole.Markup("...");
+
+        while (!Console.KeyAvailable)
+        {
+            AnsiConsole.Markup($"\r[red]Time Elapsed: {stopwatch.Elapsed.ToString(@"hh\:mm\:ss")}[/]");
+
+            Thread.Sleep(1000);
+        }
+
+        stopwatch.Stop();
+        DateTime endTime = DateTime.Now;
+
+        CodingSession newSession = new();
+        newSession.StartTime = startTime;
+        newSession.EndTime = endTime;
+        newSession.Duration = stopwatch.Elapsed.ToString(@"hh\:mm\:ss");
+
+        mainMenuModel.Create(newSession);
     }
 }
