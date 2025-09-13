@@ -20,12 +20,12 @@ internal class MainMenuModel
         connection.Execute(query, codingSession);
     }
 
-    public bool Delete(SessionRequest sessionRequest)
+    public void Delete(SessionRequest sessionRequest)
     {
         var connection = DatabaseConnection.DbConnect();
 
         string query = "DELETE FROM CodingSessions WHERE Id = @Id";
-        return Convert.ToBoolean(connection.Execute(query, sessionRequest));
+        connection.Execute(query, sessionRequest);
     }
 
     public bool Modify(CodingSession session)
