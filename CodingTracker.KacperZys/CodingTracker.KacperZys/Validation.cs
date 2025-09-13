@@ -6,16 +6,18 @@ internal static class Validation
 {
     public static DateTime DateValidation(string dateToValidate)
     {
+        string[] formats = ["yyyy-MM-dd HH:mm", "HH:mm"];
+
         while (true)
         {
-            if (DateTime.TryParseExact(dateToValidate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime correctDate))
+            if (DateTime.TryParseExact(dateToValidate, formats, CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime correctDate))
             {
                 return correctDate;
             }
             else
             {
                 AnsiConsole.MarkupLine("[red]Wrong date format! Try again.[/]");
-                AnsiConsole.MarkupLine("[yellow]Only [[YYYY-MM-DD]] format will be accepted![/]");
+                AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
                 dateToValidate = AnsiConsole.Ask<string>("Enter date: ");
             }
         }

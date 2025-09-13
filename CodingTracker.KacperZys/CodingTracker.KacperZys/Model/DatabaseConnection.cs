@@ -1,16 +1,17 @@
 ﻿using Microsoft.Data.Sqlite;
-using System.Text.Json.Nodes;
+using Microsoft.Extensions.Configuration;
 
 namespace CodingTracker.KacperZys.Model;
 internal static class DatabaseConnection
 {
     public static SqliteConnection DbConnect()
     {
-        string path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "..", "appsettings.json");
-        string jsonText = File.ReadAllText(path);
-        JsonNode node = JsonNode.Parse(jsonText)!;
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
 
-        string connectionString = node["ConnectionStrings"]!["DefaultConnection"]!.ToString();
+        string connectionString = config.GetConnectionString("DefaultConnection")!;
 
         return new SqliteConnection(connectionString);
     }

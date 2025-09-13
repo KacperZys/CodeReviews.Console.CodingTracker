@@ -13,7 +13,7 @@ internal class MainMenuController
 
         foreach (var session in sessions)
         {
-            AnsiConsole.MarkupLine($"[yellow]ID: {session.Id}, Start Time: {session.StartTime.ToString("yyyy:MM:dd")}, End Time: {session.EndTime.ToString("yyyy:MM:dd")}" +
+            AnsiConsole.MarkupLine($"[yellow]ID: {session.Id}, Start Time: {session.StartTime.ToString("yyyy-MM-dd HH:mm")}, End Time: {session.EndTime.ToString("yyyy-MM-dd HH:mm")}" +
                 $", Duration: {session.Duration} hours[/]");
         }
     }
@@ -63,7 +63,22 @@ internal class MainMenuController
             return;
         }
 
-        CodingSession updatedSession = CodingSessionCotroller.AskForSessionParams();
+        CodingSession updatedSession = new();
+
+        while (true)
+        {
+            try
+            {
+                updatedSession = CodingSessionCotroller.AskForSessionParams();
+                break;
+            }
+            catch (WrongDateException ex)
+            {
+                AnsiConsole.MarkupLine($"[red]{ex.Message}[/]");
+            }
+        }
+
+
         updatedSession.Id = id;
 
         bool ModifyStatus = mainMenuModel.Modify(updatedSession);
