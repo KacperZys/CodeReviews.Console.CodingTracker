@@ -11,12 +11,16 @@ internal class MainMenuController
     public void ViewAll()
     {
         List<CodingSession> sessions = mainMenuModel.ViewAll();
+        var table = new Table();
+        table.AddColumns("ID", "Start Time", "End Time", "Duration");
 
         foreach (var session in sessions)
         {
-            AnsiConsole.MarkupLine($"[yellow]ID: {session.Id}, Start Time: {session.StartTime.ToString("yyyy-MM-dd HH:mm")}, End Time: {session.EndTime.ToString("yyyy-MM-dd HH:mm")}" +
-                $", Duration: {session.Duration} hours[/]");
+            table.AddRow(session.Id.ToString(), session.StartTime.ToString("yyyy-MM-dd HH:mm"), session.EndTime.ToString("yyyy-MM-dd HH:mm"), session.Duration);
         }
+
+        table.Centered();
+        AnsiConsole.Write(table);
     }
 
     public void CreateSession()
