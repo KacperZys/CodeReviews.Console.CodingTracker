@@ -11,16 +11,7 @@ internal class MainMenuController
     public void ViewAll()
     {
         List<CodingSession> sessions = mainMenuModel.ViewAll();
-        var table = new Table();
-        table.AddColumns("ID", "Start Time", "End Time", "Duration");
-
-        foreach (var session in sessions)
-        {
-            table.AddRow(session.Id.ToString(), session.StartTime.ToString("yyyy-MM-dd HH:mm"), session.EndTime.ToString("yyyy-MM-dd HH:mm"), session.Duration);
-        }
-
-        table.Centered();
-        AnsiConsole.Write(table);
+        SharedMenuMethods.DisplayWithTable(sessions);
     }
 
     public void CreateSession()
@@ -128,4 +119,6 @@ internal class MainMenuController
 
         mainMenuModel.Create(newSession);
     }
+
+
 }

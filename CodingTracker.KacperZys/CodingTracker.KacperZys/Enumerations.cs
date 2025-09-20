@@ -8,6 +8,12 @@ internal class Enumerations
         Modify,
         Delete,
         Timer,
+        Advanced,
         Exit
+    }
+
+    public enum AdvancedOptions
+    {
+        FilterByDate
     }
 }

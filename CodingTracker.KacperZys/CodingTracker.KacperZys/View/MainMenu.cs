@@ -7,7 +7,8 @@ internal static class MainMenu
 {
     public static void Display()
     {
-        MainMenuController mainMenuController = new MainMenuController();
+        MainMenuController mainMenuController = new();
+        AdvancedMenu advancedMenu = new();
 
         var options = Enum.GetValues<MenuOptions>();
 
@@ -34,6 +35,9 @@ internal static class MainMenu
                     break;
                 case MenuOptions.Timer:
                     mainMenuController.Timer();
+                    break;
+                case MenuOptions.Advanced:
+                    advancedMenu.Advanced();
                     break;
                 case MenuOptions.Exit:
                     return;
