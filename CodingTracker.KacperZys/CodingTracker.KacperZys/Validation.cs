@@ -4,9 +4,18 @@ using System.Globalization;
 namespace CodingTracker.KacperZys;
 internal static class Validation
 {
-    public static DateTime DateValidation(string dateToValidate)
+    public static DateTime DateValidation(string dateToValidate, bool fullDateOnly = false)
     {
-        string[] formats = ["yyyy-MM-dd HH:mm", "yyyy-MM-dd", "HH:mm"];
+        string[] formats;
+
+        if (fullDateOnly)
+        {
+            formats = ["yyyy-MM-dd", "yyyy-MM-dd HH:mm"];
+        }
+        else
+        {
+            formats = ["yyyy-MM-dd HH:mm", "yyyy-MM-dd", "HH:mm"];
+        }
 
         while (true)
         {
@@ -17,7 +26,7 @@ internal static class Validation
             else
             {
                 AnsiConsole.MarkupLine("[red]Wrong date format! Try again.[/]");
-                AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
+                AnsiConsole.MarkupLine($"\n[yellow]Only {string.Join(", ", formats)} format will be accepted![/]");
                 dateToValidate = AnsiConsole.Ask<string>("Enter date: ");
             }
         }
@@ -44,4 +53,6 @@ internal static class Validation
             }
         }
     }
+
+
 }

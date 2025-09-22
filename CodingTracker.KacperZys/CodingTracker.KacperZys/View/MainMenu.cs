@@ -36,6 +36,9 @@ internal static class MainMenu
                 case MenuOptions.Timer:
                     mainMenuController.Timer();
                     break;
+                case MenuOptions.SetAGoal:
+                    MainMenuController.SetAGoal();
+                    break;
                 case MenuOptions.Advanced:
                     advancedMenu.Advanced();
                     break;

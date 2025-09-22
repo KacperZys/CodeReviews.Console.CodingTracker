@@ -121,5 +121,16 @@ internal class MainMenuController
         mainMenuModel.Create(newSession);
     }
 
-
+    internal static void SetAGoal()
+    {
+        AnsiConsole.MarkupLine("[yellow]Create your own goal![/]");
+        int goal = AnsiConsole.Ask<int>("[green]Enter how many hours you want to work.[/]");
+        DateTime startTime = DateTime.Now;
+        AnsiConsole.MarkupLine("[yellow]Only [[YYYY-MM-DD]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
+        DateTime endTime = Validation.DateValidation(AnsiConsole.Ask<string>("Enter ending date: "), true);
+        TimeSpan howFarToGoal = endTime - startTime;
+        AnsiConsole.MarkupLine($"[red]You have {Math.Round(howFarToGoal.TotalHours, 2)} hours left![/]");
+        double HoursPerDay = Math.Round(goal / howFarToGoal.TotalDays, 2);
+        AnsiConsole.MarkupLine($"[red]You need to work {HoursPerDay} hours every day to reach your goal.[/]");
+    }
 }

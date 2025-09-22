@@ -8,6 +8,7 @@ internal class Enumerations
         Modify,
         Delete,
         Timer,
+        SetAGoal,
         Advanced,
         Exit
     }
