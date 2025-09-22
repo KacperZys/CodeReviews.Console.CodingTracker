@@ -9,11 +9,11 @@ internal class AdvancedMenuController
     private (string startingDate, string endingDate) GetDates()
     {
         string startingDate = AnsiConsole.Ask<string>("Provide starting date");
-        AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
+        AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]], [[YYYY-NN-DD]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
         Validation.DateValidation(startingDate);
 
         string endingDate = AnsiConsole.Ask<string>("Provide ending date");
-        AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
+        AnsiConsole.MarkupLine("\n[yellow]Only [[HH:mm]], [[YYYY-NN-DD]] or [[YYYY-MM-DD HH:mm]] format will be accepted![/]");
         Validation.DateValidation(endingDate);
 
         return (startingDate, endingDate);
@@ -32,5 +32,6 @@ internal class AdvancedMenuController
         string order = GetOrder();
         var codingSessions = advancedMenuModel.FilterByDate(startingDate, endingDate, order);
         SharedMenuMethods.DisplayWithTable(codingSessions);
+        SharedMenuMethods.DisplayTotalAndAvg(codingSessions);
     }
 }

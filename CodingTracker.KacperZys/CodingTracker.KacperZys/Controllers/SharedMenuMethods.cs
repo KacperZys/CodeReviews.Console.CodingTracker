@@ -17,4 +17,17 @@ internal static class SharedMenuMethods
         table.Centered();
         AnsiConsole.Write(table);
     }
+
+    public static void DisplayTotalAndAvg(List<CodingSession> sessions)
+    {
+        var table = new Table();
+        table.AddColumns("Total Sessions", "Average Duration\n  Per Session");
+
+        string avg = SharedMenuMethodsModel.GetAvg(sessions);
+        string sum = SharedMenuMethodsModel.GetSum(sessions);
+
+        table.AddRow(sum, avg);
+        table.Centered();
+        AnsiConsole.Write(table);
+    }
 }

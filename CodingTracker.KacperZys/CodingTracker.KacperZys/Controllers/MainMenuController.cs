@@ -12,6 +12,7 @@ internal class MainMenuController
     {
         List<CodingSession> sessions = mainMenuModel.ViewAll();
         SharedMenuMethods.DisplayWithTable(sessions);
+        SharedMenuMethods.DisplayTotalAndAvg(sessions);
     }
 
     public void CreateSession()
