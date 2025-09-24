@@ -30,7 +30,6 @@ internal class MainMenuController
             }
         }
 
-
         AnsiConsole.Clear();
         AnsiConsole.MarkupLine("[green]Session added successfully.[/]");
     }
@@ -132,5 +131,23 @@ internal class MainMenuController
         AnsiConsole.MarkupLine($"[red]You have {Math.Round(howFarToGoal.TotalHours, 2)} hours left![/]");
         double HoursPerDay = Math.Round(goal / howFarToGoal.TotalDays, 2);
         AnsiConsole.MarkupLine($"[red]You need to work {HoursPerDay} hours every day to reach your goal.[/]");
+        MainMenuModel.SetAGoal(goal, startTime, endTime, Math.Round(howFarToGoal.TotalHours, 2).ToString(), HoursPerDay);
+        AnsiConsole.MarkupLine("[green]Your goal has been set! Good luck.[/]");
+    }
+
+    internal static void ViewAllGoals()
+    {
+        List<Goal> goals = MainMenuModel.GetAllGoals();
+        var table = new Table();
+        table.AddColumns("ID", "Start Time", "End Time", "Goal Time", "How Far To Reach (Hours)", "Hours Per Day");
+
+        foreach (var goal in goals)
+        {
+            table.AddRow(goal.Id.ToString(), goal.StartTime.ToString("yyyy-MM-dd HH:mm"), goal.EndTime.ToString("yyyy-MM-dd HH:mm"), goal.GoalTime.ToString(),
+                goal.HowFarToReach.ToString(), goal.HoursPerDay.ToString());
+        }
+
+        table.Centered();
+        AnsiConsole.Write(table);
     }
 }

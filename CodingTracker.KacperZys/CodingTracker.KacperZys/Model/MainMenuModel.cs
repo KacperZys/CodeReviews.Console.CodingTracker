@@ -6,7 +6,6 @@ internal class MainMenuModel
     public List<CodingSession> ViewAll()
     {
         var connection = DatabaseConnection.DbConnect();
-
         string query = "SELECT * FROM CodingSessions";
         var codingSession = connection.Query<CodingSession>(query);
 
@@ -23,7 +22,6 @@ internal class MainMenuModel
     public void Delete(SessionRequest sessionRequest)
     {
         var connection = DatabaseConnection.DbConnect();
-
         string query = "DELETE FROM CodingSessions WHERE Id = @Id";
         connection.Execute(query, sessionRequest);
     }
@@ -42,5 +40,22 @@ internal class MainMenuModel
         string query = "SELECT COUNT(1) FROM CodingSessions WHERE Id = @Id";
         int count = connection.ExecuteScalar<int>(query, sessionRequest);
         return count > 0;
+    }
+
+    internal static void SetAGoal(int goalTime, DateTime startTime, DateTime endTime, string howFarToReach, double hoursPerDay)
+    {
+        var connection = DatabaseConnection.DbConnect();
+        Goal goal = new Goal() { GoalTime = goalTime, StartTime = startTime, EndTime = endTime, HowFarToReach = howFarToReach, HoursPerDay = hoursPerDay };
+        string query = "INSERT INTO CodingGoals (StartTime, EndTime, GoalTime, HowFarToReach, HoursPerDay) VALUES (@StartTime, @EndTime, @GoalTime, @HowFarToReach, @HoursPerDay)";
+        connection.Execute(query, goal);
+    }
+
+    internal static List<Goal> GetAllGoals()
+    {
+        var connection = DatabaseConnection.DbConnect();
+        string query = "SELECT * FROM CodingGoals";
+        var goals = connection.Query<Goal>(query);
+
+        return goals.ToList();
     }
 }

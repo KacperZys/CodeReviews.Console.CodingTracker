@@ -9,6 +9,7 @@ internal class Enumerations
         Delete,
         Timer,
         SetAGoal,
+        ViewAllGoals,
         Advanced,
         Exit
     }

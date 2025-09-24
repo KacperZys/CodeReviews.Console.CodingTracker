@@ -39,13 +39,16 @@ internal static class MainMenu
                 case MenuOptions.SetAGoal:
                     MainMenuController.SetAGoal();
                     break;
+                case MenuOptions.ViewAllGoals:
+                    MainMenuController.ViewAllGoals();
+                    break;
                 case MenuOptions.Advanced:
                     advancedMenu.Advanced();
                     break;
                 case MenuOptions.Exit:
                     return;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentNullException();
             }
         }
     }

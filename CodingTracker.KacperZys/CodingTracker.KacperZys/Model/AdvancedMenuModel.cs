@@ -10,7 +10,6 @@ internal class AdvancedMenuModel
         CodingSession session = new();
         session.StartTime = DateTime.Parse(startingDate);
         session.EndTime = DateTime.Parse(endingDate);
-
         var codingSessions = connection.Query<CodingSession>(query, session);
 
         return codingSessions.ToList();

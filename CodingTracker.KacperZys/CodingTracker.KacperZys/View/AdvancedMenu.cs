@@ -20,7 +20,8 @@ internal class AdvancedMenu
             case AdvancedOptions.FilterByDate:
                 advancedMenuController.FilterByDate();
                 break;
+            default:
+                throw new ArgumentNullException();
         }
-
     }
 }

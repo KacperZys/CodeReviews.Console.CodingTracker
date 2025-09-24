@@ -46,13 +46,10 @@ internal static class Validation
             }
             else
             {
-
                 AnsiConsole.MarkupLine("[red]Wrong order format! Try again.[/]");
                 AnsiConsole.MarkupLine("\n[yellow]Only 'ascending' or 'descending' format will be accepted![/]");
                 order = AnsiConsole.Ask<string>("Enter order: ");
             }
         }
     }
-
-
 }
