@@ -11,11 +11,11 @@ internal class Enumerations
         SetAGoal,
         ViewAllGoals,
         Advanced,
-        Exit
+        Exit,
     }
 
     public enum AdvancedOptions
     {
-        FilterByDate
+        FilterByDate,
     }
 }
